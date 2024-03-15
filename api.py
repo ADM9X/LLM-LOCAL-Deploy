@@ -8,7 +8,7 @@ from src.models.baichuan import Baichuan
 
 SUPPORTED_MODELS = {
     "chatglm3-6b": ChatGLM,
-    "baichuan2_13b": Baichuan
+    "baichuan2-13b": Baichuan
 }
 
 
