@@ -66,12 +66,12 @@ pip install -r requirements.txt
 ### Mode1：Run python web_run.py directly in the virtual environment to chat with LLM
 The prerequisite is that the model data has been downloaded from the data directory, Otherwise, you can try using web_download_derictly.py files
 ```bash
-python web_easy.py
+python web_load_local.py
 ```
 ### Mode2: Run python api.py directly in the virtual environment to run unvicorn server
 The prerequisite is that the model data has been downloaded from the data directory, Otherwise, you can try using api_down_derictly.py files
 ```bash
-uvicorn api:app --reload --host 0.0.0.0 --port 8002
+uvicorn api_load_local:app --reload --host 0.0.0.0 --port 8002
 ```
 ## Models
 The LLM Local Deploy project supports the following models:
