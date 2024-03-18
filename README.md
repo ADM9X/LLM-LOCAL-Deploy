@@ -10,6 +10,8 @@ Installation
 Useage
 
 Models
+
+Reference
 ## Description
  LLM LOCAL Deployment2 allows you to deploy the LLM model locally for quantitative tasks. With this project, you can easily set up and run the LLM model on your machine. It provides a user-friendly web interface to interact with the model and explore its capabilities.  
 ## Download Model From HuggingFace Hub
