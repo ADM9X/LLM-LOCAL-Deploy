@@ -1,30 +1,22 @@
 import datetime
 import json
 from fastapi import FastAPI, Request
-import argparse
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+
 SUPPORTED_MODELS = [
     "chatglm3-6b",
     "baichuan2-13b"
 ]
 
 
-def check_args(args):
+def check_args(model):
     models_names = "\n  ".join(SUPPORTED_MODELS)
-    assert args.model in SUPPORTED_MODELS, \
-        f"Unrecognized model parameter: '{args.model}'\n{'-' * 80}\n" \
+    assert model in SUPPORTED_MODELS, \
+        f"Unrecognized model parameter: '{model}'\n{'-' * 80}\n" \
         f"Currently, only the following models are supported:\n  " \
         f'{models_names}'
 
-
-parser = argparse.ArgumentParser(description="Hypers LLMs Demo")
-parser.add_argument('--model', required=True, type=str, help='Model Name', default="chatglm3-6b")
-args = parser.parse_args()
-check_args(args)
-llm = args.model
-
-path = f"./data/{llm}/"
-tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True)
-model = AutoModelForCausalLM.from_pretrained(path, trust_remote_code=True).half().cuda()
 
 app = FastAPI()
 
@@ -36,6 +28,13 @@ async def generate(request: Request):
     json_post_list = json.loads(json_post)
 
     prompt = json_post_list.get('prompt')
+    model = json_post_list.get('model')
+    check_args(model)
+
+    path = f"./data/{model}/"
+    tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(path, trust_remote_code=True).half().cuda()
+    model = model.eval()
 
     response, history = model.chat(tokenizer, prompt, history=[])
     now = datetime.datetime.now()
