@@ -65,15 +65,16 @@ conda activate your_env_name
 pip install -r requirements.txt
 ```
 ## Useage
-### Mode1：Run python web_run.py directly in the virtual environment to chat with LLM
+### Mode1：Run python web_load_local.py directly in the virtual environment to chat with LLM
 The prerequisite is that the model data has been downloaded from the data directory, Otherwise, you can try using web_download_derictly.py files
 ```bash
 python web_load_local.py --model "chatglm3-6b"
 ```
-### Mode2: Run python api.py directly in the virtual environment to run unvicorn server
+### Mode2: Run python api_load_local.py directly in the virtual environment to run uvicorn server
 The prerequisite is that the model data has been downloaded from the data directory, Otherwise, you can try using api_down_derictly.py files
 ```bash
-uvicorn api_load_local:app --reload --host 0.0.0.0 --port 8002 --model "chatglm3-6b"
+uvicorn api_load_local:app --reload --host 0.0.0.0 --port 8002
+# params -> prompt: str, model: str
 ```
 ## Models
 The LLM Local Deploy project supports the following models:
