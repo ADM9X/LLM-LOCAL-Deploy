@@ -1,6 +1,7 @@
 import datetime
 import json
 from fastapi import FastAPI, Request
+# import argparse
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
@@ -10,6 +11,7 @@ SUPPORTED_MODELS = [
 ]
 
 
+#
 def check_args(model):
     models_names = "\n  ".join(SUPPORTED_MODELS)
     assert model in SUPPORTED_MODELS, \
